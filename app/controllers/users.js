@@ -1,42 +1,47 @@
 const User = require('../models/user')
+const { validateUser } = require('../helpers/userValidation')
+const { deleteUser, createUser, updateUser } = require('../services/users')
 
-exports.getAll = async (req, res) => {
-  try {
-    const users = await User.find({}).limit(5)
-    return res.json({ users })
-  } catch (error) {
-    return res.json({ error })
-  }
+exports.onDeleteUser = async (_id, res) => {
+  const { success } = await deleteUser(_id)
+  return res.json({ success })
 }
 
-exports.getOne = async (req, res) => {
-  try {
-    const user = await User.find({ name: 'Martin' })
-    return res.json({ user })
-  } catch (error) {
-    return res.json({ error })
-  }
-}
+exports.onCreateUser = async (req, res) => {
+  const user = req.body
 
-exports.addOne = async (req, res) => {
-  try {
-    const user = await User.create({
-      name: 'Martin',
-      email: 'martin@abv.bg',
-      password: 'my-solid-password-xxxx'
+  // Validate
+  const { error } = validateUser(user)
+  if (error) return res.json({ error })
+  // >
+
+  // Create user in DB
+  const { success } = await createUser(user)
+  if (success) {
+    return res.json({ success: true })
+  } else {
+    return res.json({
+      error: { details: [{ message: 'something went wrong' }] }
     })
-
-    return res.json({ user })
-  } catch (error) {
-    return res.json({ error })
   }
+  // >
 }
 
-exports.deleteOne = async (req, res) => {
-  try {
-    const user = await User.findOneAndRemove({ name: 'Martin' })
-    return res.json({ user })
-  } catch (error) {
-    return res.json({ error })
+exports.onUpdateUser = async (req, res) => {
+  const user = req.body
+  // Validate
+  const { error } = validateUser(user)
+  if (error) return res.json({ error })
+  // >
+
+  // Create user in DB
+  const { success } = await updateUser(user)
+  if (success) {
+    return res.json({ success: true })
+  } else {
+    return res.json({
+      error: { details: [{ message: 'something went wrong' }] }
+    })
   }
+  // >
 }

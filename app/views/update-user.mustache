@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update User</title>
+    <script src="/javascript/update-user.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/messages.css" />
+  </head>
+  <body>
+    <div class="w-50 mx-auto mt-5 card p-5 shadow-sm">
+      <h2 class="card-title text-center">Update user!</h2>
+      <div class="card-body">
+        <!-- Form -->
+        <form id="update-user-form" user-id="{{user._id}}">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="name"
+              class="form-control"
+              id="name"
+              required
+              value="{{user.name}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              required
+              value="{{user.email}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              required
+              value="{{user.password}}"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </form>
+        <!-- /Form -->
+
+        <!-- Form message -->
+        <div class="form-messages mt-3">
+          <small class="form-text text-muted" id="loading-message">
+            loading ...
+          </small>
+          <small class="form-text text-danger" id="failed-message">
+            something went wrong
+          </small>
+          <small class="form-text text-success" id="success-message">
+            user updated
+          </small>
+        </div>
+        <!-- /Form message -->
+
+        <a href="/users" class="card-link float-right mt-4">Go back</a>
+      </div>
+    </div>
+  </body>
+</html>

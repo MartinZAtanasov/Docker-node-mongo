@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/javascript/users.js"></script>
+    <link rel="stylesheet" href="/css/messages.css" />
+  </head>
+  <body>
+    <div class="w-50 mx-auto mt-5 card px-5 pt-5 pb-1 shadow-sm">
+      <h2 class="card-title text-center">View all users</h2>
+      <div class="card-body">
+        <!-- Table -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#users}}
+            <tr id="{{_id}}">
+              <td>{{index}}</td>
+              <td>{{name}}</td>
+              <td>{{email}}</td>
+              <td>
+                <a
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  href="/users/update/{{_id}}"
+                >
+                  update
+                </a>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  onclick="deleteUser('{{_id}}')"
+                >
+                  delete
+                </button>
+              </td>
+            </tr>
+            {{/users}}
+          </tbody>
+        </table>
+        <!-- /Table -->
+
+        <!-- Form message -->
+        <div class="form-messages mt-4 float-left">
+          <small class="form-text text-muted" id="loading-message">
+            loading ...
+          </small>
+          <small class="form-text text-danger" id="failed-message">
+            something went wrong
+          </small>
+          <small class="form-text text-success" id="success-message">
+            user deleted
+          </small>
+        </div>
+        <!-- /Form message -->
+
+        <a href="/" class="card-link float-right mt-4">Go back</a>
+      </div>
+    </div>
+  </body>
+</html>
