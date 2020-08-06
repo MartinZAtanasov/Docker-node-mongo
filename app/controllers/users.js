@@ -1,5 +1,9 @@
-const { validateUser } = require('../helpers/userValidation')
-const { deleteUser, createUser, updateUser } = require('../services/users')
+const { validateUser } = require('../services/userValidation')
+const {
+  deleteUser,
+  createUser,
+  updateUser
+} = require('../services/usersDataBase')
 
 // Helper function
 const defaultResponse = (res, success) => {

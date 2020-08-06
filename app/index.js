@@ -10,9 +10,10 @@ const app = express()
 
 // Middleware
 app.use(bodyParser.json())
-app.set('views', `${__dirname}/views`)
-app.set('view engine', 'mustache')
 app.engine('mustache', mustacheExpress())
+app.set('view engine', 'mustache')
+app.set('views', `${__dirname}/views`)
+app.set('partials', `${__dirname}/views/partials`)
 // >
 
 // Create static/public folder
