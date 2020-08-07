@@ -1,5 +1,5 @@
 window.onload = () => {
-  const form = document.getElementById('update-user-form')
+  const form = document.getElementById('user-form')
   const loadingMessageEl = document.getElementById('loading-message')
   const failedMessageEl = document.getElementById('failed-message')
   const successMessageEl = document.getElementById('success-message')
@@ -22,19 +22,23 @@ window.onload = () => {
     // >
 
     // Set the payload (payload will take input id as key)
-    const payload = {
-      _id: userID
-    }
+    const payload = {}
     formFields.forEach(({ id, value }) => (payload[id] = value))
+    if (userID) payload._id = userID
     // >
 
     // Make the request
-    const response = await fetch(`http://localhost:3000/api/users/${userID}`, {
+    const apiPoint = userID
+      ? `http://localhost:3000/api/users/${userID}`
+      : `http://localhost:3000/api/users/`
+    const method = userID ? 'PUT' : 'POST'
+
+    const response = await fetch(apiPoint, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      method: 'PUT',
+      method,
       body: JSON.stringify(payload)
     })
     // >
@@ -44,6 +48,7 @@ window.onload = () => {
     clearFormMessages()
     if (!error) {
       successMessageEl.style.display = 'inline'
+      if (!userID) form.reset()
     } else {
       failedMessageEl.style.display = 'inline'
       let errorMessageInnerHTML = ''

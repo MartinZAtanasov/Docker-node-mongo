@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create User</title>
-    <script src="/javascript/create-user.js"></script>
+    <script src="/javascript/submitForm.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/messages.css" />
   </head>
@@ -12,45 +12,7 @@
     <div class="w-50 mx-auto mt-5 card p-5 shadow-sm">
       <h2 class="card-title text-center">Create a new user!</h2>
       <div class="card-body">
-        <!-- Form -->
-        <form id="new-user-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="name" class="form-control" id="name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" required />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">
-            Submit
-          </button>
-        </form>
-        <!-- /Form -->
-
-        <!-- Form message -->
-        <div class="form-messages mt-3">
-          <small class="form-text text-muted" id="loading-message">
-            loading ...
-          </small>
-          <small class="form-text text-danger" id="failed-message">
-            something went wrong
-          </small>
-          <small class="form-text text-success" id="success-message">
-            user created
-          </small>
-        </div>
-        <!-- /Form message -->
-
+        {{> _form }}
         <a href="/" class="card-link float-right mt-4">Go back</a>
       </div>
     </div>

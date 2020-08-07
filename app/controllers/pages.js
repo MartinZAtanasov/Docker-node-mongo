@@ -1,4 +1,4 @@
-const { getAllUsers, getUser } = require('../services/users')
+const { getAllUsers, getUser } = require('../services/usersDataBase')
 
 exports.renderHome = async (_, res) => {
   const { length } = await getAllUsers()
