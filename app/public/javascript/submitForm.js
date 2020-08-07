@@ -6,6 +6,8 @@ window.onload = () => {
   const messagesEl = [loadingMessageEl, failedMessageEl, successMessageEl]
   const userID = form.getAttribute('user-id')
 
+  const isUpdateForm = !!userID
+
   const clearFormMessages = () =>
     messagesEl.forEach(el => (el.style.display = 'none'))
 
@@ -24,14 +26,14 @@ window.onload = () => {
     // Set the payload (payload will take input id as key)
     const payload = {}
     formFields.forEach(({ id, value }) => (payload[id] = value))
-    if (userID) payload._id = userID
+    if (isUpdateForm) payload._id = userID
     // >
 
     // Make the request
-    const apiPoint = userID
+    const apiPoint = isUpdateForm
       ? `http://localhost:3000/api/users/${userID}`
       : `http://localhost:3000/api/users/`
-    const method = userID ? 'PUT' : 'POST'
+    const method = isUpdateForm ? 'PUT' : 'POST'
 
     const response = await fetch(apiPoint, {
       headers: {
@@ -48,7 +50,7 @@ window.onload = () => {
     clearFormMessages()
     if (!error) {
       successMessageEl.style.display = 'inline'
-      if (!userID) form.reset()
+      if (!isUpdateForm) form.reset()
     } else {
       failedMessageEl.style.display = 'inline'
       let errorMessageInnerHTML = ''
